@@ -67,7 +67,7 @@ Docker login
     
 Push docker image to dockerhub
 -----------
-    docker push praveen1994dec/kubernetes-configmap-reload
+    docker push vikalsi/kubernetes-configmap-reload
     
 Deploy Spring Application:
 --------
