@@ -22,7 +22,7 @@ pipeline {
             steps {
                 gitCheckout(
                     branch: "main",
-                    url: "https://github.com/DEVOPS-WITH-WEB-DEV/spring-cloud-kubernetes.git"
+                    url: "https://github.com/vikalsi/spring-cloud-kubernetes-main.git"
                 )
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         		}
     		}
 	    }
-	    stage("DockerBuild and Push") {
+	    stage("DockerBuild") {
 	        when {
 				expression { params.action == 'create' }
 			}
@@ -46,6 +46,16 @@ pipeline {
 	            }
 	        }
 	    }
+		stage('Docker Image Push : DockerHub '){
+         	when { 
+				expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   dockerImagePush("${params.ImageName}", "${params.docker_repo}")
+               }
+            }
+        }   
 	    stage("Docker-CleanUP") {
 	        when {
 				expression { params.action == 'create' }
